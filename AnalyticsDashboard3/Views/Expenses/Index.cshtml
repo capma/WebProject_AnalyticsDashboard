@@ -1,0 +1,87 @@
+﻿<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+@using Highsoft.Web.Mvc.Charts
+@model AnalyticsDashboard3.Models.FilterExpense
+
+@{
+    ViewBag.Title = "Expenses Chart";
+}
+
+<script type="text/javascript">
+
+    function formatYAxisLabels() {
+        return this.value;
+    }
+
+</script>
+
+<h2>Expenses Chart</h2>
+
+@using (Html.BeginForm("Index", "Expenses", FormMethod.Post, new { @class = "form-inline" }))
+{
+    @*@Html.ValidationSummary(true)*@
+
+    @Html.DropDownListFor(model => model.SelectedMonth, (IEnumerable<SelectListItem>)ViewBag.Months, "Month", new { @class = "form-control" })
+    @Html.DropDownListFor(model => model.SelectedYear, (IEnumerable<SelectListItem>)ViewBag.Years, "Year", new { @class = "form-control" })
+    @Html.DropDownListFor(model => model.SelectedCategory, (IEnumerable<SelectListItem>)ViewBag.Categories, "Category", new { @class = "form-control" })
+
+    <input type="submit" value="Filter" class="btn btn-primary" />
+}
+
+@(Html.Highsoft().GetHighcharts(
+    new Highcharts
+    {
+        Title = new Title
+        {
+            Text = "Monthly Average Expense Amount"
+        },
+        XAxis = new List<XAxis>
+        {
+            new XAxis
+            {
+                Categories = @ViewData["XDates"] as List<string>,
+
+                Crosshair = new XAxisCrosshair
+                {
+                    Width = 1
+                }
+            }
+        },
+        YAxis = new List<YAxis>
+        {
+            new YAxis
+            {
+                Title = new YAxisTitle
+                {
+                    Text = "Amount"
+                },
+                Labels = new YAxisLabels
+                {
+                    Formatter = "formatYAxisLabels"
+                },
+                Crosshair = new YAxisCrosshair
+                {
+                    Width = 1
+                }
+            }
+        },
+        Tooltip = new Tooltip
+        {
+            Shared = true
+        },
+        PlotOptions = new PlotOptions
+        {
+            Spline = new PlotOptionsSpline
+            {
+                Marker = new PlotOptionsSplineMarker
+                {
+                    Radius = 4,
+                    LineColor = "#666666",
+                    LineWidth = 1
+                }
+            }
+        },
+        Series = @ViewData["ListSeriesPrice"] as List<Series>
+    }
+, "chart")
+)

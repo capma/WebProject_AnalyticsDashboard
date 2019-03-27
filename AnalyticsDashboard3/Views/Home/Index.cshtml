@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Team Awesome Software Company</h1>
+    <p class="lead">Team Awesome Software Company has fast become a dynamic and fast-moving company in Client Solution Management in Information Technology in Canada and has proven itself to be one of the market leaders.</p>
+    @*<p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Sales Chart</h2>
+        <p>
+            Pie charts are specific types of data presentation where the data is represented in the form of a circle. 
+            In a pie chart, a circle is divided into various sections or segments such that each sector or 
+            segment represents a certain proportion or percentage of the total.
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "Sales")">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Expenses Chart</h2>
+        <p>A bar graph (also known as a bar chart or bar diagram) is a visual tool that uses bars to compare data among categories. 
+            A bar graph may run horizontally or vertically. The important thing to know is that the longer the bar, the greater its value.</p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "Expenses")">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Advertising Chart</h2>
+        <p>Line charts connect individual data points in a view. They provide a simple way to visualize a sequence of values and are useful when you want to see trends over time, or to forecast future values. </p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "Advertisings")">Learn more &raquo;</a></p>
+    </div>
+</div>
